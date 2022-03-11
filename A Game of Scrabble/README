@@ -1,0 +1,67 @@
+TASK 0:
+-am creat o functie intitulata INITIALISE_BOARD, pentru a parcurge matricea si a o initializa cu '.'
+-am afisat-o utilizand functia PRINT_BOARD
+
+TASK 1:
+-am creat o functie insert_words, unde l-am citit pe N, adica nr de cuvinte, iar apoi, cu o structura repetitiva, am citit si componentele unui cuvant, adica y, x, directia, cuvantul;
+initial, in cazul in care aveam caracterul '\n', l-am eliminat. apoi, am impartit string-ul
+in token-uri, pentru a delimita coordonatele cuvantului, directia si cuvantul
+pentru a folosi valoarea intreaga a coordonatelor/directiei, am folosit functia atoi
+daca valoarea intreaga a lui d a fost 0, cu o structura repetitiva am adaugat cuvantul pe tabla
+pe pozitie orizontala, iar daca a fost 1, pe verticala (dreapta-stanga, sus-jos)
+-pentru a parcurge literele cuvantului, am folosit variabila k, initializata cu 0 pentru fiecare 
+cuvant, si crescuta dupa ce litera de pe pozitia k a fost adaugata.
+
+TASK 2:
+-am creat o functie points_simple, care calcula efectiv punctajul alocat celor doi playeri, fara
+bonusuri
+-am creat un vector points[26], in care am adaugat punctajele impuse in cerinta
+-am citit iar cuvintele cu toate elementele de coordonate si directie, si daca i-ul (variabila care imi numara cate cuvinte au fost citite) este impara, calculez punctele pentru player 1
+si daca este para, pentru player 2, punctele fiind calculate in variabilele de scor score1
+si score2, unde adun valorile din vectorul points, dupa sintaxa points[ word [k] - 'A'] (k este
+pozitia literei din cuvant)
+-la final am afisat punctajele pentru player1 si player 2
+
+TASK 3:
+-pentru acest task, am creat o functie principala bonus_points, in care am procedat la fel ca in primul task de citire, insa inainte de a citi N si cele N cuvinte, am citit cele doua substring-uri
+xx si yy
+-am eliminat '\n' in cazul in care aparea in cadrul celor doua substringuri
+-pentru a calcula cele doua punctaje cu bonus, am creat o functie de calculare a punctajului
+-in acea functie, denumita calculate_points, avand ca parametri tabla de bonus, coordonatele cuvantului
+directia, lungimea, vectorul de puncte simple, cuvantul citit si cele doua substring-uri am procedat
+astfel:
+*am calculat punctajul fara a verifica daca se aplica regula de bonus sau nu, deoarece un cuvant
+poate sa nu indeplineasca aceste conditii
+*apoi, am verificat daca substring-ul xx se afla in cuvant, folosind functia strstr (am comparat-o cu NULL, deoarece functia returneaza un pointer, si in cazul in care substringul se afla in cuvant, rezultatul este diferit de NULL)
+*am parcurs dupa directia lui d matricea de bonus, si daca cuvantul este plasat peste o valoare de 1, am crescut un contor, acesta fiind initial 0
+*dupa parcurgerea matricei de bonus, am inmultit punctele cu 2 la puterea contorului ( am creat o functie recursiva de calculare a puterii) , pentru ca astfel era regula de bonus pentru substringul xx
+*am procedat la fel pentru yy, doar ca am inclus o conditie suplimentara, cea ca yy sa se afle la final de cuvant
+*si diferit de bonusul pentru xx, pentru yy punctajul este inmultit cu 3 la puterea contorului (care este reinitializat cu 0 pentru verificarea cu yy)
+*la final functia intoarce punctajele corect calculate cu conditiile de bonus.
+-apoi, am facut discutie in functie de acelasi i care numara cate cuvinte au fost citite (impar pt player1, par pt player2) si am apelat functia de calculare a bonusului pentru cuvinte, rezultatul fiind adunat la score1 respectiv score 2
+-am afisat punctajele celor 2 playeri
+
+TASK4:
+-pentru acest task, am creat doua functii pe care le-am folosit, mai exact remove_word, care elimina cuvantul care umreaza a fi plasat pe tabla din vectorul words (din util/scrabble.h), si intoarce noua valoare a lui n, si functia insert_new_word, care primeste ca parametrii tabla de joc, n (numarul de cuvinte din words) si vectorul de cuvinte words (din util/scrabble.h)
+-in insert_new_words, cu o functie repetitiva am cautat primul cuvant care indeplineste conditia de a fi adaugat pe tabla de joc
+-in interiorul acestei functii, am verificat daca prima litera a cuvantului din words se afla pe tabla
+si in cazul in care se afla, folosindu-ma de break-uri, am memorat coordonatele unde acea litera
+se afla pe tabla
+-
+daca atat coordonata de rand (row), cat si cea de coloana (column) sunt mai mici decat 15,
+si cuvantul din words incape atat pe verticala cat si pe orizontala pe tabla, am inceput
+verificarea conditiilor din cerinta (daca poate fi scris pe orizontala, altfel pe verticala, si daca
+nu iese din tabla)
+-am verificat daca pe tabla sunt spatii goale de la acea litera pana la lungimea cuvantului adunata
+la coordonata (fie pe verticala cat si pe orizontala, caci algoritmul este acelasi atat pe lungime, cat si pe latime)
+-daca variabila care verifica daca tabla este goala ajunge pana pe pozitia conditiei impusa in for
+inseamna ca este spatiu liber si cuvantul poate fi plasat pe tabla
+-folosind o variabila l, am parcurs spatiile de pe tabla, si am inclus literele pe tabla, folosind
+variabila k pentru a parcurge literele cuvantului din words.
+-daca un cuvant a fost inclus pe tabla, va iesi pe ramura de break, si for-ul se va opri
+-daca un cuvant nu respecta conditiile de incadrare pe tabla, acesta nu va fi inclus nicaieri, iar for-ul va continua pe ramura de else, adica pe instructiunea "continue"
+-functia principala next_word contine aceste doua functii de implementare a unui nou cuvant pe tabla.
+
+IN MAIN:
+-in main, am citit un numar de task, in variabila task_number, unde am verificat valoarea pe care o primeste din imput, astfel ca daca primeste numele task-ului, sa execute functia task-ului respectiv.
+
